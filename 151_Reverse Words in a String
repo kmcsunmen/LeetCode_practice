@@ -1,0 +1,32 @@
+char* reverseWords(char* s) {
+    int len = strlen(s);
+    char* rst = malloc(len + 1);
+
+    int idx = len - 1, size = 0;
+
+    for (int i = len - 1; i >= 0; i--) {
+        if (s[i] == ' ') {
+
+            if (i + 1 <= idx) {   // ⭐ 단어가 있을 때만
+                for (int j = i + 1; j <= idx; j++) {
+                    rst[size++] = s[j];
+                }
+                rst[size++] = ' ';
+            }
+
+            idx = i - 1;
+        }
+    }
+
+    if (idx >= 0) {  // 마지막 단어
+        for (int i = 0; i <= idx; i++) {
+            rst[size++] = s[i];
+        }
+    }
+
+    if (size > 0 && rst[size - 1] == ' ')
+        size--;  // 마지막 공백 제거
+
+    rst[size] = '\0';
+    return rst;
+}
